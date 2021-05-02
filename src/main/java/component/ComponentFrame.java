@@ -1,5 +1,6 @@
 package component;
 
+import core.IComponentConfig;
 import component.panel.Content;
 import component.panel.Footer;
 import component.panel.Header;
@@ -15,7 +16,7 @@ public class ComponentFrame extends JFrame {
         Footer footer = new Footer();
 
         this.setTitle("E-Mail Client");
-        this.setSize(IComponentConfig.WIDGET_WIDTH, IComponentConfig.WIDGET_HEIGHT);
+        this.setSize(IComponentConfig.COMPONENT_WIDTH, IComponentConfig.COMPONENT_HEIGHT);
         this.setVisible(Boolean.TRUE);
         this.setLayout(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
