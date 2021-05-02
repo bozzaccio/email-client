@@ -4,8 +4,8 @@ import core.om.ActionEnum;
 
 public abstract class AbstractRequestModel {
 
-    ActionEnum action;
-    int messageId;
+    private ActionEnum action;
+    private int messageId;
 
     public ActionEnum getAction() {
         return action;

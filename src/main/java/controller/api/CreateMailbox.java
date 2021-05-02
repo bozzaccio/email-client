@@ -11,6 +11,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
+import java.util.List;
 import java.util.Objects;
 
 public class CreateMailbox implements IRestApi<CreateMailboxRequest, CreateMailboxResponse> {
@@ -27,9 +28,17 @@ public class CreateMailbox implements IRestApi<CreateMailboxRequest, CreateMailb
                     .method("GET", HttpRequest.BodyPublishers.noBody())
                     .build();
 
-            return HttpClient.newHttpClient()
-                    .send(httpRequest, new JsonBodyHandler<>(CreateMailboxResponse.class))
+            CreateMailboxResponse response = new CreateMailboxResponse();
+
+            List<String> addressBookList =  HttpClient.newHttpClient()
+                    .send(httpRequest, new JsonBodyHandler<>(List.class))
                     .body();
+
+            addressBookList.forEach(addressBook -> {
+                response.getEmailAddressSet().add(addressBook);
+            });
+
+            return response;
         }
     }
 
