@@ -1,9 +1,9 @@
 package controller;
 
-import controller.api.CreateMailbox;
-import controller.api.GetAllMail;
-import controller.api.GetMail;
-import controller.api.GetMailAttachment;
+import controller.api.mailbox.CreateMailbox;
+import controller.api.mail.GetAllMail;
+import controller.api.mail.GetMail;
+import controller.api.mail.GetMailAttachment;
 import core.exception.MailNotFoundException;
 import core.exception.MailboxNotFoundException;
 import core.om.request.CreateMailboxRequest;

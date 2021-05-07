@@ -1,11 +1,9 @@
-import component.ComponentFrame;
+import component.client.ClientFrame;
 
 public class Application {
 
-
-
     public static void main(String[] args) {
 
-        ComponentFrame frame = new ComponentFrame();
+        ClientFrame frame = new ClientFrame();
     }
 }

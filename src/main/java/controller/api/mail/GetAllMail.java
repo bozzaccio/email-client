@@ -1,4 +1,4 @@
-package controller.api;
+package controller.api.mail;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import core.IRestApi;
