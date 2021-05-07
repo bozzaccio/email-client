@@ -1,4 +1,4 @@
-package controller.api;
+package controller.api.mail;
 
 import core.IRestApi;
 import core.exception.BadRequestException;
