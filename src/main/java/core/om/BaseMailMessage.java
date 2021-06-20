@@ -2,10 +2,20 @@ package core.om;
 
 public class BaseMailMessage {
 
-    Integer id;
-    String from;
-    String subject;
-    String date;
+    private Integer id;
+    private String from;
+    private String subject;
+    private String date;
+
+    public BaseMailMessage() {
+    }
+
+    public BaseMailMessage(Integer id, String from, String subject, String date) {
+        this.id = id;
+        this.from = from;
+        this.subject = subject;
+        this.date = date;
+    }
 
     public Integer getId() {
         return id;

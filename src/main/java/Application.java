@@ -10,7 +10,7 @@ public class Application {
 
         try {
             if (ConfigReader.loadConfig()) {
-                new ClientFrame();
+                ClientFrame.start();
             }
         } catch (IOException | ConfigurationNotFoundException e) {
             e.printStackTrace();

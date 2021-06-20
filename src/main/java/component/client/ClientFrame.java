@@ -12,11 +12,11 @@ import core.om.response.GetAllMailResponse;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.Objects;
-import java.util.Vector;
-import java.util.stream.Collectors;
 
 public class ClientFrame extends JFrame {
 
@@ -51,7 +51,7 @@ public class ClientFrame extends JFrame {
 
                 model.setRowCount(0);
 
-                if(Objects.nonNull(response.getMailMessageList()) && response.getMailMessageList().size() > 0) {
+                if (Objects.nonNull(response.getMailMessageList()) && response.getMailMessageList().size() > 0) {
 
                     response.getMailMessageList().forEach(message -> {
                         model.addRow(BaseMailMessage.getMailMessageObj(message));
@@ -62,5 +62,21 @@ public class ClientFrame extends JFrame {
                 exception.printStackTrace();
             }
         });
+
+        content.getMailTable().addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent mouseEvent) {
+                JTable table =(JTable) mouseEvent.getSource();
+                int rowId = table.rowAtPoint(mouseEvent.getPoint());
+
+                if (mouseEvent.getClickCount() == 2 && table.getSelectedRow() != -1) {
+                    System.out.println(rowId);
+                }
+            }
+        });
+    }
+
+    public static void start() {
+        new ClientFrame();
     }
 }

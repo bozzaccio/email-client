@@ -2,9 +2,9 @@ package core.om;
 
 public class Attachment {
 
-    String filename;
-    String contentType;
-    Integer size;
+    private String filename;
+    private String contentType;
+    private Integer size;
 
     public String getFilename() {
         return filename;

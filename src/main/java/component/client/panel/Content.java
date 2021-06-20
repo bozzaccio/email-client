@@ -19,7 +19,11 @@ public class Content extends JPanel {
         String[] tableColumns = new String[]{"from", "subject", "date"};
         Object[][] rows = new Object[][]{};
 
-        DefaultTableModel tableModel = new DefaultTableModel(rows, tableColumns);
+        DefaultTableModel tableModel = new DefaultTableModel(rows, tableColumns) {
+            public boolean isCellEditable(int row, int column){
+                return false;
+            }
+        };
         mailTable.setModel(tableModel);
         mailTable.revalidate();
 
