@@ -14,8 +14,15 @@ public class Content extends JPanel {
 
         this.setBounds(0, 100, IComponentConfig.COMPONENT_WIDTH, 300);
 
-
         mailTable = new JTable();
+
+        String[] tableColumns = new String[]{"from", "subject", "date"};
+        Object[][] rows = new Object[][]{};
+
+        DefaultTableModel tableModel = new DefaultTableModel(rows, tableColumns);
+        mailTable.setModel(tableModel);
+        mailTable.revalidate();
+
         JScrollPane scrollPane = new JScrollPane(mailTable);
 
         this.add(scrollPane);

@@ -6,6 +6,7 @@ import component.client.panel.Header;
 import controller.EmailController;
 import core.AppConfig;
 import core.IComponentConfig;
+import core.om.BaseMailMessage;
 import core.om.response.GetAllMailResponse;
 
 import javax.swing.*;
@@ -13,6 +14,9 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.Objects;
+import java.util.Vector;
+import java.util.stream.Collectors;
 
 public class ClientFrame extends JFrame {
 
@@ -35,21 +39,25 @@ public class ClientFrame extends JFrame {
         this.add(footer);
 
         footer.getRefreshButton().addActionListener(e -> {
-            String username = AppConfig.emailAddress.substring(0, AppConfig.emailAddress.indexOf('@'));
-            String domain = AppConfig.emailAddress.substring(AppConfig.emailAddress.indexOf('@'));
+            String username = AppConfig.emailAddress
+                    .substring(0, AppConfig.emailAddress.indexOf('@'));
+            String domain = AppConfig.emailAddress
+                    .substring(AppConfig.emailAddress.indexOf('@'))
+                    .replace("@", "");
             try {
                 GetAllMailResponse response = controller.getAllMailOfMailbox(username, domain);
 
+                DefaultTableModel model = (DefaultTableModel) content.getMailTable().getModel();
 
-                String[] tableColumns = new String[]{"from", "subject", "date"};
-                Object[][] rows = new Object[][]{
-                        {"dm5wolyd9z@wwjmp.com", "Subject", "2021-05-07 17:26:33"}
-                };
+                model.setRowCount(0);
 
+                if(Objects.nonNull(response.getMailMessageList()) && response.getMailMessageList().size() > 0) {
 
-                DefaultTableModel tableModel = new DefaultTableModel(rows, tableColumns);
-                content.getMailTable().setModel(tableModel);
-                content.getMailTable().revalidate();
+                    response.getMailMessageList().forEach(message -> {
+                        model.addRow(BaseMailMessage.getMailMessageObj(message));
+                    });
+                }
+
             } catch (IOException | URISyntaxException | InterruptedException exception) {
                 exception.printStackTrace();
             }

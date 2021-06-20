@@ -1,13 +1,11 @@
 package core.om;
 
-import java.util.Date;
-
 public class BaseMailMessage {
 
     Integer id;
     String from;
     String subject;
-    Date date;
+    String date;
 
     public Integer getId() {
         return id;
@@ -33,11 +31,15 @@ public class BaseMailMessage {
         this.subject = subject;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
+    }
+
+    public static Object[] getMailMessageObj(BaseMailMessage message) {
+        return new Object[]{ message.getFrom(), message.getSubject(), message.getDate() };
     }
 }
