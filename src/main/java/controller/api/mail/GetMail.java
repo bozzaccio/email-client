@@ -1,5 +1,6 @@
 package controller.api.mail;
 
+import core.AppConfig;
 import core.IRestApi;
 import core.exception.BadRequestException;
 import core.om.request.GetMailRequest;
@@ -24,7 +25,7 @@ public class GetMail implements IRestApi<GetMailRequest, GetMailResponse> {
             String url = urlBuilder(request);
 
             HttpRequest httpRequest = HttpRequest.newBuilder(new URI(url))
-                    .header("Accept", "application/json")
+                    .header("Accept", "application.yaml/json")
                     .method("GET", HttpRequest.BodyPublishers.noBody())
                     .build();
 
@@ -48,7 +49,7 @@ public class GetMail implements IRestApi<GetMailRequest, GetMailResponse> {
 
     @Override
     public String urlBuilder(GetMailRequest request) {
-        String url = IRestApi.baseUrl + "?";
+        String url = AppConfig.apiConfig.getApiUrl() + "?";
 
         if (Objects.nonNull(request.getAction())) {
             url = url + "action=" + request.getAction().toString();

@@ -1,6 +1,7 @@
 package controller.api.mail;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import core.AppConfig;
 import core.IRestApi;
 import core.exception.BadRequestException;
 import core.om.BaseMailMessage;
@@ -30,7 +31,7 @@ public class GetAllMail implements IRestApi<GetAllMailRequest, GetAllMailRespons
             GetAllMailResponse response = new GetAllMailResponse();
 
             HttpRequest httpRequest = HttpRequest.newBuilder(new URI(url))
-                    .header("Accept", "application/json")
+                    .header("Accept", "application.yaml/json")
                     .method("GET", HttpRequest.BodyPublishers.noBody())
                     .build();
 
@@ -63,7 +64,7 @@ public class GetAllMail implements IRestApi<GetAllMailRequest, GetAllMailRespons
 
     @Override
     public String urlBuilder(GetAllMailRequest request) {
-        String url = IRestApi.baseUrl + "?";
+        String url = AppConfig.apiConfig.getApiUrl() + "?";
 
         if (Objects.nonNull(request.getAction())) {
             url = url + "action=" + request.getAction().toString();

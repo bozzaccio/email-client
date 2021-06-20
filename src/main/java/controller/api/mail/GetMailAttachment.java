@@ -1,5 +1,6 @@
 package controller.api.mail;
 
+import core.AppConfig;
 import core.IRestApi;
 import core.exception.BadRequestException;
 import core.om.request.GetAttachmentRequest;
@@ -48,7 +49,7 @@ public class GetMailAttachment implements IRestApi<GetAttachmentRequest, GetAtta
 
     @Override
     public String urlBuilder(GetAttachmentRequest request) {
-        String url = IRestApi.baseUrl + "?";
+        String url = AppConfig.apiConfig.getApiUrl() + "?";
 
         if (Objects.nonNull(request.getAction())) {
             url = url + "action=" + request.getAction().toString();

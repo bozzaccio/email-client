@@ -1,0 +1,13 @@
+# API url properties
+api:
+  protocol: "https"
+  url: "www.1secmail.com"
+  path: "api/v1/"
+
+# SMTP configuration
+smtp:
+  host: "mail.1secmail.com"
+  auth: "false"
+  port: 25
+  username: ""
+  password: ""

@@ -1,6 +1,8 @@
 package controller.api.mail;
 
 import com.sun.mail.smtp.SMTPTransport;
+import core.AppConfig;
+import core.IBaseApi;
 import core.om.StatusEnum;
 import core.om.request.CreateMailRequest;
 import core.om.response.CreateMailResponse;
@@ -14,18 +16,14 @@ import java.util.Date;
 import java.util.Objects;
 import java.util.Properties;
 
-public class CreateMail {
+public class CreateMail implements IBaseApi<CreateMailRequest, CreateMailResponse> {
 
-    private static final String SMTP_SERVER = "mail.1secmail.com";
-    private static final String USERNAME = "";
-    private static final String PASSWORD = "";
-
-    public static CreateMailResponse send(CreateMailRequest request) {
+    public CreateMailResponse execute(CreateMailRequest request) {
 
         Properties prop = new Properties();
-        prop.put("mail.smtp.host", SMTP_SERVER);
-        prop.put("mail.smtp.auth", "false");
-        prop.put("mail.smtp.port", "25");
+        prop.put("mail.smtp.host", AppConfig.smtpConfig.getHost());
+        prop.put("mail.smtp.auth", AppConfig.smtpConfig.getAuth());
+        prop.put("mail.smtp.port", AppConfig.smtpConfig.getPort().toString());
 
         Session session = Session.getInstance(prop, null);
         Message msg = new MimeMessage(session);
@@ -43,7 +41,9 @@ public class CreateMail {
 
             SMTPTransport t = (SMTPTransport) session.getTransport("smtp");
 
-            t.connect(SMTP_SERVER, USERNAME, PASSWORD);
+            t.connect(AppConfig.smtpConfig.getHost(),
+                    AppConfig.smtpConfig.getUsername(),
+                    AppConfig.smtpConfig.getPassword());
             t.sendMessage(msg, msg.getAllRecipients());
 
             System.out.println("Response Code: " + t.getLastReturnCode());

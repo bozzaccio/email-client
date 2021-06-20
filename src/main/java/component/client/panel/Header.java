@@ -1,7 +1,7 @@
 package component.client.panel;
 
 import controller.EmailController;
-import core.Global;
+import core.AppConfig;
 import core.om.response.CreateMailboxResponse;
 
 import javax.swing.*;
@@ -35,7 +35,7 @@ public class Header extends JPanel {
 
                 if (response.getEmailAddressSet().stream().findFirst().isPresent()) {
                     emailAddress.setText(response.getEmailAddressSet().stream().findFirst().get());
-                    Global.emailAddress = emailAddress.getText();
+                    AppConfig.emailAddress = emailAddress.getText();
                 }
 
             } catch (Exception ex) {
