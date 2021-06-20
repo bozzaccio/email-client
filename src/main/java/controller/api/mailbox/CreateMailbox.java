@@ -1,5 +1,6 @@
 package controller.api.mailbox;
 
+import core.AppConfig;
 import core.IRestApi;
 import core.exception.BadRequestException;
 import core.om.request.CreateMailboxRequest;
@@ -24,7 +25,7 @@ public class CreateMailbox implements IRestApi<CreateMailboxRequest, CreateMailb
         } else {
             String url = urlBuilder(request);
             HttpRequest httpRequest = HttpRequest.newBuilder(new URI(url))
-                    .header("Accept", "application/json")
+                    .header("Accept", "application.yaml/json")
                     .method("GET", HttpRequest.BodyPublishers.noBody())
                     .build();
 
@@ -54,7 +55,7 @@ public class CreateMailbox implements IRestApi<CreateMailboxRequest, CreateMailb
 
     @Override
     public String urlBuilder(CreateMailboxRequest createMailboxRequest) {
-        String url = IRestApi.baseUrl + "?";
+        String url = AppConfig.apiConfig.getApiUrl() + "?";
 
         if (Objects.nonNull(createMailboxRequest.getAction())) {
             url = url + "action=" + createMailboxRequest.getAction().toString();
